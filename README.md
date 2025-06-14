@@ -18,7 +18,7 @@ uv sync
 ### 3. Prepare GitHub token
 
 Create the classic token at [Personal access tokens (classic)](https://github.com/settings/tokens)
-with the `repo` scope.
+with the `repo` and `delete_repo` scope.
 
 Then create the `.env` file:
 
