@@ -8,13 +8,8 @@ from github import GithubException
 
 def is_empty_repo(client, repo_name):
     repo = client.get_repo(repo_name)
-    try:
-        repo.get_contents("/")
-    except GithubException as e:
-        message = e.args[1]['message']
-        if e.status == 404 and message == "This repository is empty.":
-            return True
-    return False
+    branches = repo.get_branches()
+    return branches.totalCount == 0
 
 
 def main(user_name: str, delete: bool = False):
@@ -23,8 +18,7 @@ def main(user_name: str, delete: bool = False):
         raise ValueError("GITHUB_TOKEN is not set in .env file")
 
     g = github.Github(token)
-    user = g.get_user(user_name)
-    repos = user.get_repos(type="all")
+    repos = g.search_repositories(query=f"user:{user_name}")
 
     for repo in tqdm.tqdm(list(repos), desc="Checking repositories"):
         if is_empty_repo(g, repo.full_name):
