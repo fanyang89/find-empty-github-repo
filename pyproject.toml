@@ -1,0 +1,12 @@
+[project]
+name = "find-empty-github-repo"
+version = "0.1.0"
+description = "Find and delete empty GitHub repositories"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fire>=0.7.0",
+    "pygithub>=2.6.1",
+    "python-dotenv>=1.1.0",
+    "tqdm>=4.67.1",
+]
